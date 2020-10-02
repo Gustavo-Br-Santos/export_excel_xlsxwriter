@@ -8,7 +8,7 @@ class ExportExcel:
         self.__nome_arquivo = nome_arquivo
 
     def __formatacoes(self, workbook, cabecalho_planilha=False, cabecalho_tabela=False, conteudo_tabela=False):
-
+    
         if cabecalho_planilha:
 
             formatacao = workbook.add_format({'bold': True, 'font_color': 'white', 'bg_color':'#FF8C00',
