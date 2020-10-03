@@ -76,18 +76,30 @@ class ExportExcel:
 
         for x in coordenadas_x:
             chart = workbook.add_chart({'type': 'line'})
+            chart.set_y_axis({'visible': True})
+            chart.set_x_axis({ 'name': 'Datas'})
+            chart.set_y_axis({ 'name': 'Varor(R$)'})
+            chart.set_title({'name': 'Lucros',
+                             'name_font': {
+                                'name': 'Calibri',
+                                'color': 'orange',
+                                },
+                             })
+            
 
             # Última linha do eixo x de coordenadas
             ul = len(x) - 1
             chart.add_series({
-                'categories': ['Tabelas', x[1], 0, x[ul], 0],
-                'values': ['Tabelas', x[1], 1, x[ul], 1],
+                'name': ['Tabelas', x[1] , 1, x[1] , 1],
+                'categories': ['Tabelas', x[2], 0, x[ul], 0],
+                'values': ['Tabelas', x[2], 1, x[ul], 1],
                 'line': {'color': 'red'},
             })
 
             chart.add_series({
-                'categories': ['Tabelas', x[1], 0, x[ul], 0],
-                'values': ['Tabelas', x[1], 2, x[ul], 2],
+                'name': ['Tabelas', x[1] , 2, x[1] , 2],
+                'categories': ['Tabelas', x[2], 0, x[ul], 0],
+                'values': ['Tabelas', x[2], 2, x[ul], 2],
                 'line': {'color': 'blue'},
             })
 
@@ -106,7 +118,7 @@ class ExportExcel:
 cabecalho = ['data', 'max', 'min']
 dados = [
     (('tabela1',), ('01/05/2013', 100, 10), ('09/02/2013', 200, 20), ('07/05/2020', 150, 15), ('08/09/2020', 80, 8)),
-    (('tabela2',), ('02/06/2014', 110, 11), ('06/03/2013', 220, 22), ('03/06/2018', 300, 20), ('15/12/2021', 180, 15)),
+    (('tabela2',), ('02/06/2014', None, 11), ('06/03/2013', 220, 22), ('03/06/2018', 300, 20), ('15/12/2021', 180, 15)),
     (('tabela3',), ('03/07/2015', 185, 19), ('07/04/2013', 167, 35), ('06/11/2019', 273, 50), ('17/11/2017', 280, 20))
 ]
 nome = 'teste.xlsx'
