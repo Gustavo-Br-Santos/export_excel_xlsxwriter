@@ -1,4 +1,5 @@
 import xlsxwriter
+import random
 
 class ExportExcel:
 
@@ -71,6 +72,7 @@ class ExportExcel:
     def __cria_planilha_grafico(self, coordenadas_x, worksheet_grafico, workbook):
         """Planilha que almazenará os gráficos das tabelas contidas na outra planilha"""
 
+        r = lambda: random.randint(0,255)
         row = 0
         col = 0
 
@@ -89,18 +91,20 @@ class ExportExcel:
 
             # Última linha do eixo x de coordenadas
             ul = len(x) - 1
+            cor = '#{:02x}{:02x}{:02x}'.format(r(), r(), r())
             chart.add_series({
                 'name': ['Tabelas', x[1] , 1, x[1] , 1],
                 'categories': ['Tabelas', x[2], 0, x[ul], 0],
                 'values': ['Tabelas', x[2], 1, x[ul], 1],
-                'line': {'color': 'red'},
+                'line': {'color': cor},
             })
 
+            cor = '#{:02x}{:02x}{:02x}'.format(r(), r(), r())
             chart.add_series({
                 'name': ['Tabelas', x[1] , 2, x[1] , 2],
                 'categories': ['Tabelas', x[2], 0, x[ul], 0],
                 'values': ['Tabelas', x[2], 2, x[ul], 2],
-                'line': {'color': 'blue'},
+                'line': {'color': cor},
             })
 
             worksheet_grafico.insert_chart(row, col, chart)
